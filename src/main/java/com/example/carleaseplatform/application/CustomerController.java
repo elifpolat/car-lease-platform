@@ -1,6 +1,7 @@
 package com.example.carleaseplatform.application;
 
 import com.example.carleaseplatform.domain.Customer;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class CustomerController {
   }
 
   @PostMapping
-  public Customer addCustomer(@RequestBody Customer customer) {
+  public Customer addCustomer(@RequestBody @Valid Customer customer) {
     System.out.println("Create customer called");
     return customerService.saveCustomer(customer);
   }

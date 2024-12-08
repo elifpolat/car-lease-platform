@@ -1,6 +1,7 @@
 package com.example.carleaseplatform.application;
 
 import com.example.carleaseplatform.domain.Car;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class CarController {
   }
 
   @PostMapping
-  public Car addCar(@RequestBody Car car) {
+  public Car addCar(@RequestBody @Valid Car car) {
     return carService.saveCar(car);
   }
 
