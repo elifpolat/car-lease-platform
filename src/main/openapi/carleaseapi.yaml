@@ -1,0 +1,241 @@
+openapi: 3.0.3
+info:
+  title: Car Lease Platform API
+  version: 1.0.0
+  description: API documentation for the Car Lease Platform
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the customer
+        name:
+          type: string
+          description: Full name of the customer
+        street:
+          type: string
+          description: Street address of the customer
+        houseNumber:
+          type: string
+          description: House number of the customer
+        zipCode:
+          type: string
+          description: ZIP code of the customer
+        place:
+          type: string
+          description: City or town of the customer
+        email:
+          type: string
+          description: Email address of the customer
+          format: email
+        phoneNumber:
+          type: string
+          description: Phone number of the customer
+      required:
+        - name
+        - email
+        - phoneNumber
+    Car:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the car
+        brand:
+          type: string
+          description: Brand of the car
+        model:
+          type: string
+          description: Model of the car
+        year:
+          type: integer
+          description: Manufacture year of the car
+        price:
+          type: number
+          format: float
+          description: Price of the car
+        availability:
+          type: boolean
+          description: Whether the car is available for lease
+      required:
+        - brand
+        - model
+        - year
+        - price
+security:
+  - BearerAuth: []
+paths:
+  /api/customers:
+    get:
+      summary: Get all customers
+      description: Retrieve a list of all customers.
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A list of customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '401':
+          description: Unauthorized
+    post:
+      summary: Add a new customer
+      description: Create a new customer and save it to the database.
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: Customer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /api/customers/{id}:
+    get:
+      summary: Get a customer by ID
+      description: Retrieve a specific customer by their ID.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the customer to retrieve
+      responses:
+        '200':
+          description: Customer retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Customer not found
+        '401':
+          description: Unauthorized
+    delete:
+      summary: Delete a customer
+      description: Remove a specific customer by their ID.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the customer to delete
+      responses:
+        '204':
+          description: Customer deleted successfully
+        '404':
+          description: Customer not found
+        '401':
+          description: Unauthorized
+  /api/cars:
+    get:
+      summary: Get all cars
+      description: Retrieve a list of all cars.
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A list of cars
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Car'
+        '401':
+          description: Unauthorized
+    post:
+      summary: Add a new car
+      description: Create a new car and save it to the database.
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+      responses:
+        '201':
+          description: Car created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /api/cars/{id}:
+    get:
+      summary: Get a car by ID
+      description: Retrieve a specific car by its ID.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the car to retrieve
+      responses:
+        '200':
+          description: Car retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+        '404':
+          description: Car not found
+        '401':
+          description: Unauthorized
+    delete:
+      summary: Delete a car
+      description: Remove a specific car by its ID.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the car to delete
+      responses:
+        '204':
+          description: Car deleted successfully
+        '404':
+          description: Car not found
+        '401':
+          description: Unauthorized
