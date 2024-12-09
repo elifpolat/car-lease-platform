@@ -10,9 +10,9 @@ import java.util.Date;
 @Component
 public class JwtUtil {
   private final Key key = new SecretKeySpec("a-very-secure-key-at-least-32-characters".getBytes(), "HmacSHA256");
-  private final long expirationMs = 3600000; // 1 hour
 
   public String generateToken(String username) {
+    long expirationMs = 3600000;
     return Jwts.builder()
         .setSubject(username)
         .setIssuedAt(new Date())

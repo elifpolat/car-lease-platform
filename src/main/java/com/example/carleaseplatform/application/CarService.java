@@ -1,6 +1,7 @@
 package com.example.carleaseplatform.application;
 
 import com.example.carleaseplatform.domain.Car;
+import com.example.carleaseplatform.domain.exception.CarNotFoundException;
 import com.example.carleaseplatform.infrastructure.CarRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,7 @@ public class CarService {
 
   public Car getCarById(Long id) {
     return carRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Car not found"));
-  }
+        .orElseThrow(CarNotFoundException::new);  }
 
   public Car saveCar(Car car) {
     return carRepository.save(car);

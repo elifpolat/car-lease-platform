@@ -1,6 +1,7 @@
 package com.example.carleaseplatform.application;
 
 import com.example.carleaseplatform.domain.Customer;
+import com.example.carleaseplatform.domain.exception.CustomerNotFoundException;
 import com.example.carleaseplatform.infrastructure.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class CustomerService {
 
   public Customer getCustomerById(Long id) {
     return customerRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Customer not found"));
+        .orElseThrow(CustomerNotFoundException::new);
   }
 
   public Customer saveCustomer(Customer customer) {

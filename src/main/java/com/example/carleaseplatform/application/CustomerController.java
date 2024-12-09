@@ -2,7 +2,6 @@ package com.example.carleaseplatform.application;
 
 import com.example.carleaseplatform.domain.Customer;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 @RequestMapping("/api/customers")
 public class CustomerController {
 
-  @Autowired
   private final CustomerService customerService;
 
   public CustomerController(CustomerService customerService) {

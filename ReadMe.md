@@ -48,11 +48,6 @@ Run the Docker container:
 docker run -p 8080:8080 --name car-lease-platform car-lease-platform
 ```
 
-3. Running the Application
-
-    The application runs on http://localhost:8080 by default.
-
-
 ## Documentation
 1. API Documentation
 API documentation is available via Swagger at http://localhost:8080/swagger-ui.html.

@@ -13,6 +13,45 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
+    ApiErrors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiError'
+          description: Messages that can be displayed to the end user
+    ApiError:
+      type: object
+      x-class-extra-annotation: "@com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL)"
+      properties:
+        error:
+          type: string
+          description: |
+            Indicates a predefined list of possible errors that could occur.
+            * `CAR_LEASE_API_UNAVAILABLE` - Car Lease API is unavailable
+            * `CAR_NOT_FOUND` - Car is not found
+            * `CUSTOMER_NOT_FOUND` - Customer is not found
+          enum:
+            - CAR_LEASE_API_UNAVAILABLE
+            - CAR_NOT_FOUND
+            - CUSTOMER_NOT_FOUND
+        error_description:
+          type: string
+          description: |
+            Description about the error.
+        error_hint:
+          type: string
+          description: |
+            An information about the error field
+        status_code:
+          type: integer
+          description: |
+            error http status code
+        error_debug:
+          type: string
+          description: |
+            Detailed description of the error.
     Customer:
       type: object
       properties:
@@ -72,6 +111,36 @@ components:
         - model
         - year
         - price
+    LeaseRateRequest:
+      type: object
+      properties:
+        mileagePerMonth:
+          type: number
+          format: float
+          description: Mileage per month
+        duration:
+          type: integer
+          description: Duration of the lease in months
+        interestRate:
+          type: number
+          format: float
+          description: Interest rate as a percentage
+        nettPrice:
+          type: number
+          format: float
+          description: Nett price of the car
+      required:
+        - mileagePerMonth
+        - duration
+        - interestRate
+        - nettPrice
+    LeaseRateResponse:
+      type: object
+      properties:
+        leaseRate:
+          type: number
+          format: float
+          description: Calculated lease rate
 security:
   - BearerAuth: []
 paths:
@@ -237,5 +306,28 @@ paths:
           description: Car deleted successfully
         '404':
           description: Car not found
+        '401':
+          description: Unauthorized
+  /api/lease/calculate:
+    post:
+      summary: Calculate lease rate
+      description: Calculate the lease rate based on input parameters.
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeaseRateRequest'
+      responses:
+        '200':
+          description: Lease rate calculated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseRateResponse'
+        '400':
+          description: Invalid input data
         '401':
           description: Unauthorized

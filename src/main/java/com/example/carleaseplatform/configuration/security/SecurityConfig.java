@@ -46,7 +46,7 @@ public class SecurityConfig {
   public UserDetailsService userDetailsService() {
     return username -> User.builder()
         .username(username)
-        .password(passwordEncoder().encode("password")) // Default password for testing
+        .password(passwordEncoder().encode("password"))
         .roles("USER")
         .build();
   }
