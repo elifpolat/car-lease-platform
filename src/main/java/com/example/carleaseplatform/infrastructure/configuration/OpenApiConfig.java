@@ -1,4 +1,4 @@
-package com.example.carleaseplatform.configuration;
+package com.example.carleaseplatform.infrastructure.configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

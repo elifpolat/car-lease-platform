@@ -1,6 +1,6 @@
-package com.example.carleaseplatform.application;
+package com.example.carleaseplatform.adapter.in;
 
-import com.example.carleaseplatform.configuration.security.JwtUtil;
+import com.example.carleaseplatform.infrastructure.configuration.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

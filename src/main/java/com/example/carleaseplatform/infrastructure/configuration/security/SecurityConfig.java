@@ -1,4 +1,4 @@
-package com.example.carleaseplatform.configuration.security;
+package com.example.carleaseplatform.infrastructure.configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

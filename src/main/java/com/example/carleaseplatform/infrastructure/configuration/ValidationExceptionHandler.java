@@ -1,4 +1,4 @@
-package com.example.carleaseplatform.configuration;
+package com.example.carleaseplatform.infrastructure.configuration;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

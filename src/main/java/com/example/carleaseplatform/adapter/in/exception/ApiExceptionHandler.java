@@ -1,4 +1,4 @@
-package com.example.carleaseplatform.application;
+package com.example.carleaseplatform.adapter.in.exception;
 
 import com.example.carleaseplatform.domain.exception.BusinessException;
 import com.example.carleaseplatform.model.ApiError;
@@ -14,19 +14,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 @Slf4j
 @ControllerAdvice
 @RequiredArgsConstructor
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
-
-  @ExceptionHandler(Exception.class)
-  public ResponseEntity<?> handleAll(Exception ex) {
-    log.error(ex.getMessage(), ex);
-    var apiError = new ApiError()
-        .error(ErrorEnum.CAR_LEASE_API_UNAVAILABLE)
-        .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(new HttpHeaders()).body(new ApiErrors().addErrorsItem(apiError));
-  }
 
   @ExceptionHandler(AccessDeniedException.class)
   public ResponseEntity<?> handleAccessDenied(Exception ex, WebRequest request) {

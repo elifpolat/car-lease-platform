@@ -1,4 +1,4 @@
-package com.example.carleaseplatform.configuration.security;
+package com.example.carleaseplatform.infrastructure.configuration.security;
 
 import io.jsonwebtoken.*;
 import javax.crypto.spec.SecretKeySpec;
