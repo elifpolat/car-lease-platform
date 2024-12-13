@@ -1,6 +1,6 @@
 package com.example.carleaseplatform.adapter.in.mapper;
 
-import com.example.carleaseplatform.domain.Customer;
+import com.example.carleaseplatform.adapter.out.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants.ComponentModel;
 import org.mapstruct.ReportingPolicy;
@@ -9,5 +9,6 @@ import org.mapstruct.ReportingPolicy;
 public interface CustomerMapper {
 
   Customer toDomain(com.example.carleaseplatform.model.CustomerApiModel customerApiModel);
+  com.example.carleaseplatform.model.CustomerApiModel toApi(Customer customerApiModel);
 
 }

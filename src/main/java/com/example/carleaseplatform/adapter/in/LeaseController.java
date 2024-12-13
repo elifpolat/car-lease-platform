@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @InboundAdapter
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/lease")
+@RequestMapping("/api/v1/lease")
 public class LeaseController implements com.example.carleaseplatform.api.CarLeaseApi {
 
   private final LeaseRateUsecase leaseRateUsecase;

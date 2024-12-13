@@ -14,7 +14,7 @@ tags:
   - name: car
     description: Provides car-related services
 paths:
-  /api/customers:
+  /api/v1/customers:
     get:
       summary: Get all customers
       description: Retrieve a list of all customers.
@@ -59,7 +59,7 @@ paths:
           description: Bad request
         '401':
           description: Unauthorized
-  /api/customers/{id}:
+  /api/v1/customers/{id}:
     get:
       summary: Get a customer by ID
       description: Retrieve a specific customer by their ID.
@@ -110,7 +110,7 @@ paths:
           description: Customer not found
         '401':
           description: Unauthorized
-  /api/cars:
+  /api/v1/cars:
     get:
       summary: Get all cars
       description: Retrieve a list of all cars.
@@ -155,7 +155,7 @@ paths:
           description: Bad request
         '401':
           description: Unauthorized
-  /api/cars/{id}:
+  /api/v1/cars/{id}:
     get:
       summary: Get a car by ID
       description: Retrieve a specific car by its ID.
@@ -206,7 +206,7 @@ paths:
           description: Car not found
         '401':
           description: Unauthorized
-  /api/lease/calculate:
+  /api/v1/lease/calculate:
     post:
       summary: Calculate lease rate
       description: Calculate the lease rate based on input parameters.

@@ -1,6 +1,5 @@
 package com.example.carleaseplatform.adapter.in;
 
-import com.example.carleaseplatform.adapter.in.converter.CustomerDtoConverter;
 import com.example.carleaseplatform.adapter.in.mapper.CustomerMapper;
 import com.example.carleaseplatform.application.port.in.CustomerUsecase;
 import com.example.carleaseplatform.infrastructure.configuration.InboundAdapter;
@@ -22,14 +21,13 @@ public class CustomerController implements com.example.carleaseplatform.api.Cust
 
   private final CustomerUsecase customerUsecase;
   private final CustomerMapper customerMapper;
-  private final CustomerDtoConverter customerDtoConverter;
 
   @Override
   @PostMapping
   public ResponseEntity<CustomerApiModel> addCustomer(@RequestBody CustomerApiModel customer) {
     log.info("Adding a new customer: {}", customer);
     var savedCustomer = customerUsecase.saveCustomer(customerMapper.toDomain(customer));
-    var customerApiModel = customerDtoConverter.apply(savedCustomer);
+    var customerApiModel = customerMapper.toApi(savedCustomer);
     return ResponseEntity.ok(customerApiModel);
   }
 
@@ -46,7 +44,7 @@ public class CustomerController implements com.example.carleaseplatform.api.Cust
   public ResponseEntity<List<CustomerApiModel>> getAllCustomers() {
     log.info("Fetching all customers");
     var customers = customerUsecase.getAllCustomers().stream()
-        .map(customerDtoConverter)
+        .map(customerMapper::toApi)
         .collect(Collectors.toList());
     return ResponseEntity.ok(customers);
   }
@@ -55,7 +53,7 @@ public class CustomerController implements com.example.carleaseplatform.api.Cust
   @GetMapping("/{id}")
   public ResponseEntity<CustomerApiModel> getCustomerById(@PathVariable Long id) {
     log.info("Fetching customer with ID: {}", id);
-    var customer = customerDtoConverter.apply(customerUsecase.getCustomerById(id));
+    var customer = customerMapper.toApi(customerUsecase.getCustomerById(id));
     return ResponseEntity.ok(customer);
   }
 }

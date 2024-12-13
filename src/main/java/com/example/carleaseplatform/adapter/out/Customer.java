@@ -1,4 +1,4 @@
-package com.example.carleaseplatform.domain;
+package com.example.carleaseplatform.adapter.out;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

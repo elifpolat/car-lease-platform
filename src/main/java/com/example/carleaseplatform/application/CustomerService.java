@@ -1,7 +1,7 @@
 package com.example.carleaseplatform.application;
 
 import com.example.carleaseplatform.application.port.in.CustomerUsecase;
-import com.example.carleaseplatform.domain.Customer;
+import com.example.carleaseplatform.adapter.out.Customer;
 import com.example.carleaseplatform.domain.exception.CustomerNotFoundException;
 import com.example.carleaseplatform.infrastructure.CustomerRepository;
 import lombok.RequiredArgsConstructor;

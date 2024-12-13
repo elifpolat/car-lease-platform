@@ -1,6 +1,5 @@
 package com.example.carleaseplatform.adapter.in;
 
-import com.example.carleaseplatform.adapter.in.converter.CarDtoConverter;
 import com.example.carleaseplatform.adapter.in.mapper.CarMapper;
 import com.example.carleaseplatform.application.port.in.CarUsecase;
 import com.example.carleaseplatform.infrastructure.configuration.InboundAdapter;
@@ -21,13 +20,12 @@ public class CarController implements com.example.carleaseplatform.api.CarApi {
 
   private final CarUsecase carUsecase;
   private final CarMapper carMapper;
-  private final CarDtoConverter carDtoConverter;
 
   @Override
   public ResponseEntity<CarApiModel> addCar(@RequestBody CarApiModel car) {
     log.info("Adding a new car: {}", car);
     var savedCar = carUsecase.saveCar(carMapper.toDomain(car));
-    return ResponseEntity.ok(carDtoConverter.apply(savedCar));
+    return ResponseEntity.ok(carMapper.toApi(savedCar));
   }
 
   @Override
@@ -42,7 +40,7 @@ public class CarController implements com.example.carleaseplatform.api.CarApi {
   public ResponseEntity<List<CarApiModel>> getAllCars() {
     log.info("Fetching all cars");
     var cars = carUsecase.getAllCars().stream()
-        .map(carDtoConverter)
+        .map(carMapper::toApi)
         .toList();
     return ResponseEntity.ok(cars);
   }
@@ -51,6 +49,6 @@ public class CarController implements com.example.carleaseplatform.api.CarApi {
   public ResponseEntity<CarApiModel> getCarById(@PathVariable Long id) {
     log.info("Fetching car with ID: {}", id);
     var car = carUsecase.getCarById(id);
-    return ResponseEntity.ok(carDtoConverter.apply(car));
+    return ResponseEntity.ok(carMapper.toApi(car));
   }
 }

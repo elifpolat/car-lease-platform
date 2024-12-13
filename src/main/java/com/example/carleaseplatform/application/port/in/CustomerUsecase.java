@@ -1,6 +1,6 @@
 package com.example.carleaseplatform.application.port.in;
 
-import com.example.carleaseplatform.domain.Customer;
+import com.example.carleaseplatform.adapter.out.Customer;
 import java.util.List;
 
 public interface CustomerUsecase {

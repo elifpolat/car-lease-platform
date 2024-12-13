@@ -1,8 +1,7 @@
 package com.example.carleaseplatform.adapter.in.mapper;
 
-import com.example.carleaseplatform.domain.Lease;
+import com.example.carleaseplatform.adapter.out.Lease;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants.ComponentModel;
 import org.mapstruct.ReportingPolicy;
 
@@ -11,5 +10,6 @@ public interface CarLeaseMapper {
 
   Lease toDomain(com.example.carleaseplatform.model.LeaseRateRequest leaseRateRequest);
 
+  com.example.carleaseplatform.model.LeaseRateRequest toApi(Lease lease);
 
 }

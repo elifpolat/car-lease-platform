@@ -1,7 +1,7 @@
 package com.example.carleaseplatform.application;
 
 import com.example.carleaseplatform.application.port.in.CarUsecase;
-import com.example.carleaseplatform.domain.Car;
+import com.example.carleaseplatform.adapter.out.Car;
 import com.example.carleaseplatform.domain.exception.CarNotFoundException;
 import com.example.carleaseplatform.infrastructure.CarRepository;
 import lombok.RequiredArgsConstructor;
