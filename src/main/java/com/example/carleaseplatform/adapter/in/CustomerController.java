@@ -33,7 +33,14 @@ public class CustomerController implements com.example.carleaseplatform.api.Cust
     var customerApiModel = customerMapper.toApi(savedCustomer);
     return ResponseEntity.ok(customerApiModel);
   }
-
+  @Override
+  @PutMapping("/{id}")
+  public ResponseEntity<CustomerApiModel> updateCustomerById(@PathVariable Long id, @RequestBody CustomerApiModel customer) {
+    var customerDomain = customerMapper.toDomain(customer);
+    customerDomain.setId(id);
+    var updated = customerUsecase.saveCustomer(customerDomain);
+    return ResponseEntity.ok(customerMapper.toApi(updated));
+  }
   @Override
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteCustomerById(@PathVariable Long id) {

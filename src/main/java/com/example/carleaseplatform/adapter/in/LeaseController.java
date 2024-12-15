@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+/**
+ * Controller class responsible for handling lease-related operations.
+ * This class provides endpoints to calculate lease rates based on input parameters
+ * or using a car's ID to get nett price.
+ */
 @Slf4j
 @InboundAdapter
 @RestController
@@ -26,7 +31,13 @@ public class LeaseController implements com.example.carleaseplatform.api.CarLeas
     this.leaseRateUsecase = leaseRateUsecase;
   }
 
-
+  /**
+   * Calculates the lease rate based on the provided input parameters.
+   *
+   * @param leaseRateApiModel the lease rate calculation input containing mileage, duration,
+   *                          interest rate, and nett price
+   * @return a {@link ResponseEntity} containing the calculated lease rate in the response body
+   */
   @Override
   @PostMapping("/calculate")
   public ResponseEntity<LeaseRateResponse> calculateLeaseRate(@Valid @RequestBody LeaseRateApiModel leaseRateApiModel) {
@@ -41,6 +52,13 @@ public class LeaseController implements com.example.carleaseplatform.api.CarLeas
     return ResponseEntity.ok(response);
   }
 
+  /**
+   * Calculates the lease rate using a car ID and other input parameters.
+   * The car's nett price is fetched using the car ID.
+   *
+   * @param request the request containing the lease rate calculation input and the car ID
+   * @return a {@link ResponseEntity} containing the calculated lease rate in the response body
+   */
   @Override
   @PostMapping("/calculate-with-car-id")
   public ResponseEntity<LeaseRateResponse> calculateLeaseRateUsingCarId(

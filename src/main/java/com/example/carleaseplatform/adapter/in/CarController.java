@@ -31,6 +31,14 @@ public class CarController implements CarApi {
     var savedCar = carUsecase.saveCar(carMapper.toDomain(car));
     return ResponseEntity.ok(carMapper.toApi(savedCar));
   }
+  @Override
+  @PutMapping("/{id}")
+  public ResponseEntity<CarApiModel> updateCarById(@PathVariable Long id, @RequestBody CarApiModel car) {
+    var carDomain = carMapper.toDomain(car);
+    carDomain.setId(id);
+    var updated = carUsecase.saveCar(carDomain);
+    return ResponseEntity.ok(carMapper.toApi(updated));
+  }
 
   @Override
   @DeleteMapping("/{id}")

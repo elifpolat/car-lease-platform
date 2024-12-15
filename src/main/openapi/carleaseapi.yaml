@@ -87,6 +87,41 @@ paths:
           description: Customer not found
         '401':
           description: Unauthorized
+    put:
+      summary: Update a customer by ID
+      description: Update an existing customer's information using their ID.
+      operationId: updateCustomerById
+      tags:
+        - customer
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: The ID of the customer to update.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerApiModel'
+      responses:
+        '200':
+          description: Customer updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerApiModel'
+        '400':
+          description: Bad request
+        '404':
+          description: Customer not found
+        '401':
+          description: Unauthorized
     delete:
       summary: Delete a customer
       description: Remove a specific customer by their ID.
@@ -202,6 +237,41 @@ paths:
       responses:
         '204':
           description: Car deleted successfully
+        '404':
+          description: Car not found
+        '401':
+          description: Unauthorized
+    put:
+      summary: Update a car by ID
+      description: Update an existing car's information using its ID.
+      operationId: updateCarById
+      tags:
+        - car
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: The ID of the car to update.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarApiModel'
+      responses:
+        '200':
+          description: Car updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarApiModel'
+        '400':
+          description: Bad request
         '404':
           description: Car not found
         '401':
