@@ -1,14 +1,45 @@
 package com.example.carleaseplatform.adapter.in.mapper;
 
 import com.example.carleaseplatform.adapter.out.Customer;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants.ComponentModel;
-import org.mapstruct.ReportingPolicy;
+import org.springframework.stereotype.Component;
+import com.example.carleaseplatform.model.CustomerApiModel;
 
-@Mapper(componentModel = ComponentModel.SPRING, typeConversionPolicy = ReportingPolicy.ERROR)
-public interface CustomerMapper {
+@Component
+public class CustomerMapper {
 
-  Customer toDomain(com.example.carleaseplatform.model.CustomerApiModel customerApiModel);
-  com.example.carleaseplatform.model.CustomerApiModel toApi(Customer customerApiModel);
+  public Customer toDomain(CustomerApiModel customerApiModel) {
+    if (customerApiModel == null) {
+      return null;
+    }
 
+    Customer customer = new Customer();
+    customer.setId(customerApiModel.getId());
+    customer.setName(customerApiModel.getName());
+    customer.setStreet(customerApiModel.getStreet());
+    customer.setHouseNumber(customerApiModel.getHouseNumber());
+    customer.setZipCode(customerApiModel.getZipCode());
+    customer.setPlace(customerApiModel.getPlace());
+    customer.setEmail(customerApiModel.getEmail());
+    customer.setPhoneNumber(customerApiModel.getPhoneNumber());
+
+    return customer;
+  }
+
+  public CustomerApiModel toApi(Customer customer) {
+    if (customer == null) {
+      return null;
+    }
+
+    CustomerApiModel customerApiModel = new CustomerApiModel();
+    customerApiModel.setId(customer.getId());
+    customerApiModel.setName(customer.getName());
+    customerApiModel.setStreet(customer.getStreet());
+    customerApiModel.setHouseNumber(customer.getHouseNumber());
+    customerApiModel.setZipCode(customer.getZipCode());
+    customerApiModel.setPlace(customer.getPlace());
+    customerApiModel.setEmail(customer.getEmail());
+    customerApiModel.setPhoneNumber(customer.getPhoneNumber());
+
+    return customerApiModel;
+  }
 }

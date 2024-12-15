@@ -14,7 +14,7 @@ tags:
   - name: car
     description: Provides car-related services
 paths:
-  /api/v1/customers:
+  /api/customers:
     get:
       summary: Get all customers
       description: Retrieve a list of all customers.
@@ -59,7 +59,7 @@ paths:
           description: Bad request
         '401':
           description: Unauthorized
-  /api/v1/customers/{id}:
+  /api/customers/{id}:
     get:
       summary: Get a customer by ID
       description: Retrieve a specific customer by their ID.
@@ -110,7 +110,7 @@ paths:
           description: Customer not found
         '401':
           description: Unauthorized
-  /api/v1/cars:
+  /api/cars:
     get:
       summary: Get all cars
       description: Retrieve a list of all cars.
@@ -155,7 +155,7 @@ paths:
           description: Bad request
         '401':
           description: Unauthorized
-  /api/v1/cars/{id}:
+  /api/cars/{id}:
     get:
       summary: Get a car by ID
       description: Retrieve a specific car by its ID.
@@ -206,7 +206,7 @@ paths:
           description: Car not found
         '401':
           description: Unauthorized
-  /api/v1/lease/calculate:
+  /api/lease/calculate:
     post:
       summary: Calculate lease rate
       description: Calculate the lease rate based on input parameters.
@@ -232,7 +232,42 @@ paths:
           description: Invalid input data
         '401':
           description: Unauthorized
-
+  /api/lease/calculate-with-car-id:
+    post:
+      summary: Calculate lease rate using car ID
+      description: Calculate the lease rate based on a car ID and other input parameters. The `nettPrice` is optional as the car ID will be used to fetch the car details.
+      operationId: calculateLeaseRateUsingCarId
+      tags:
+        - carLease
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                leaseRateRequest:
+                  $ref: '#/components/schemas/LeaseRateApiModel'
+                carId:
+                  type: integer
+                  format: int64
+                  description: ID of the car
+              required:
+                - leaseRateRequest
+                - carId
+      responses:
+        '200':
+          description: Lease rate calculated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseRateResponse'
+        '400':
+          description: Invalid input data
+        '401':
+          description: Unauthorized
 components:
   securitySchemes:
     BearerAuth:
@@ -366,12 +401,11 @@ components:
         nettPrice:
           type: number
           format: double
-          description: Nett price of the car
-      required:
-        - mileagePerMonth
-        - duration
-        - interestRate
-        - nettPrice
+          description: Nett price of the car (optional when using car ID)
+          required:
+            - mileage
+            - duration
+            - interestRate
     LeaseRateResponse:
       type: object
       properties:

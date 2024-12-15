@@ -40,4 +40,17 @@ public class Car {
   @DecimalMin(value = "0.0", inclusive = false, message = "Nett price must be greater than 0")
   private double nettPrice;
 
+  public Car(Long id, String brand, String model, String version, int numberOfDoors, int co2Emission, double grossPrice, double nettPrice) {
+    this.id = id;
+    this.brand = brand;
+    this.model = model;
+    this.version = version;
+    this.numberOfDoors = numberOfDoors;
+    this.co2Emission = co2Emission;
+    this.grossPrice = grossPrice;
+    this.nettPrice = nettPrice;
+  }
+
+  public Car() {
+  }
 }

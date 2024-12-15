@@ -33,4 +33,11 @@ public class OpenApiConfig {
         .pathsToMatch("/api/cars/**")
         .build();
   }
+  @Bean
+  public GroupedOpenApi leaseApi() {
+    return GroupedOpenApi.builder()
+        .group("lease")
+        .pathsToMatch("/api/lease/**")
+        .build();
+  }
 }

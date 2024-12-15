@@ -4,7 +4,7 @@ import com.example.carleaseplatform.adapter.in.mapper.CustomerMapper;
 import com.example.carleaseplatform.application.port.in.CustomerUsecase;
 import com.example.carleaseplatform.infrastructure.configuration.InboundAdapter;
 import com.example.carleaseplatform.model.CustomerApiModel;
-import lombok.RequiredArgsConstructor;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,17 +15,20 @@ import java.util.stream.Collectors;
 @Slf4j
 @InboundAdapter
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/customers")
 public class CustomerController implements com.example.carleaseplatform.api.CustomerApi {
 
   private final CustomerUsecase customerUsecase;
   private final CustomerMapper customerMapper;
 
+  public CustomerController(CustomerUsecase customerUsecase, CustomerMapper customerMapper) {
+    this.customerUsecase = customerUsecase;
+    this.customerMapper = customerMapper;
+  }
+
   @Override
   @PostMapping
-  public ResponseEntity<CustomerApiModel> addCustomer(@RequestBody CustomerApiModel customer) {
-    log.info("Adding a new customer: {}", customer);
+  public ResponseEntity<CustomerApiModel> addCustomer(@RequestBody @Valid CustomerApiModel customer) {
     var savedCustomer = customerUsecase.saveCustomer(customerMapper.toDomain(customer));
     var customerApiModel = customerMapper.toApi(savedCustomer);
     return ResponseEntity.ok(customerApiModel);
@@ -34,7 +37,6 @@ public class CustomerController implements com.example.carleaseplatform.api.Cust
   @Override
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteCustomerById(@PathVariable Long id) {
-    log.info("Deleting customer with ID: {}", id);
     customerUsecase.deleteCustomer(id);
     return ResponseEntity.noContent().build();
   }
@@ -42,7 +44,6 @@ public class CustomerController implements com.example.carleaseplatform.api.Cust
   @Override
   @GetMapping
   public ResponseEntity<List<CustomerApiModel>> getAllCustomers() {
-    log.info("Fetching all customers");
     var customers = customerUsecase.getAllCustomers().stream()
         .map(customerMapper::toApi)
         .collect(Collectors.toList());
@@ -52,7 +53,6 @@ public class CustomerController implements com.example.carleaseplatform.api.Cust
   @Override
   @GetMapping("/{id}")
   public ResponseEntity<CustomerApiModel> getCustomerById(@PathVariable Long id) {
-    log.info("Fetching customer with ID: {}", id);
     var customer = customerMapper.toApi(customerUsecase.getCustomerById(id));
     return ResponseEntity.ok(customer);
   }

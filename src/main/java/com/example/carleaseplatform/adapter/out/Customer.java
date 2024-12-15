@@ -37,4 +37,17 @@ public class Customer {
   @Pattern(regexp = "\\+?\\d+", message = "Phone number should be valid")
   private String phoneNumber;
 
+  public Customer(Long id, String name, String street, String houseNumber, String zipCode, String place, String email, String phoneNumber) {
+    this.id = id;
+    this.name = name;
+    this.street = street;
+    this.houseNumber = houseNumber;
+    this.zipCode = zipCode;
+    this.place = place;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
+  }
+
+  public Customer() {
+  }
 }
