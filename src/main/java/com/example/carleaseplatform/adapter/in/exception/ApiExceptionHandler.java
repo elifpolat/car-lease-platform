@@ -32,4 +32,6 @@ public class ApiExceptionHandler {
         ));
     return ResponseEntity.badRequest().body(errors);
   }
+
+  //TODO: Add more handling cases for business exceptions
 }

@@ -58,41 +58,37 @@ The **Car Lease Platform API** is a microservice-based REST API designed to faci
 
 ### Setup
 
-1. Clone the repository:
+1. **Clone the repository:**
 
   ```
    git clone https://github.com/elifpolat/car-lease-platform.git
    cd car-lease-platform
    ```
-2. Build the Project
+2. **Build the Project**
 
   ```
    mvn clean install
 ```
-3. Access API Documentation (Swagger UI)
-   Once the application is running, access the Swagger UI to explore the API interactively:
-
-Swagger UI
-
-This provides detailed API documentation, schemas, and testing options.
-
+3. **Access API Documentation (Swagger UI)**
+   Once the application is running, access the [Swagger UI](http://localhost:8080/swagger-ui.html) to explore the API interactively.
+   This provides detailed API documentation, schemas, and testing options.
 
 ### API Endpoints
 
-1. Customer Management
+1. **Customer Management**
  - GET /api/customers: Retrieve a list of all customers.
  - GET /api/customers/{id}: Retrieve a customer by their ID. 
  - POST /api/customers: Add a new customer. 
  - PUT /api/customers/{id}: Update an existing customer. 
  - DELETE /api/customers/{id}: Delete a customer.
 
-2. Car Management
+2. **Car Management**
  - GET /api/cars: Retrieve a list of all cars. 
  - GET /api/cars/{id}: Retrieve a car by its ID. 
  - POST /api/cars: Add a new car. 
  - PUT /api/cars/{id}: Update an existing car. 
  - DELETE /api/cars/{id}: Delete a car.
-3. Lease Rate Calculation
+3. **Lease Rate Calculation**
  - POST /api/lease/calculate: Calculate the lease rate based on parameters like mileage, duration, interest rate, and price.
  - POST /api/lease/calculate-with-car-id: Calculate the lease rate using a car ID to fetch vehicle details.
 
@@ -100,4 +96,8 @@ This provides detailed API documentation, schemas, and testing options.
  - Containerization using Docker for easier deployment.
  - Persistent datastore integration (e.g., PostgreSQL in production environments).
  - Advanced metrics and logging with tools like Prometheus and Grafana.
- - Fixing bugs in SwaggerUI
+ - Fixing bugs in SwaggerUI.
+ - Adding new exception handling mechanism.
+ - Secret management integration 
+ - Adding javadoc for all services
+

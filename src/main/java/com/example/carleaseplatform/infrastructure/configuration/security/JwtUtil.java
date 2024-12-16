@@ -9,6 +9,7 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
+
   private final Key key = new SecretKeySpec("a-very-secure-key-at-least-32-characters".getBytes(), "HmacSHA256");
 
   public String generateToken(String username) {
