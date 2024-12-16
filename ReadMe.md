@@ -2,18 +2,18 @@
 
 ## Overview
 
-The **Car Lease Platform API** is a microservice-based REST API designed to facilitate car leasing operations. It allows brokers and leasing companies to manage customers, vehicles, and calculate leasing rates with ease. Built with modern Java and Spring Boot, this API adheres to microservices principles and offers secure, scalable, and maintainable solutions.
+The **Car Lease Platform API** is a microservice-based REST API designed to facilitate car leasing operations. It allows brokers and leasing companies to manage customers, vehicles, and calculate leasing rates with ease.
 
 ---
 
 ## Features
 
 - **Customer Management**:
-   - Add, update, retrieve, and delete customer records.
+   - Add, update, get, and delete customer records.
    - Supports basic customer attributes like name, address, email, and phone number.
 
 - **Car Management**:
-   - Add, update, retrieve, and delete car records.
+   - Add, update, get, and delete car records.
    - Manages key car details such as brand, model, version, CO2 emissions, and pricing.
 
 - **Lease Rate Calculation**:
@@ -27,16 +27,15 @@ The **Car Lease Platform API** is a microservice-based REST API designed to faci
 - **Interactive Documentation**:
    - Swagger UI integration for exploring and testing the API interactively.
 
-- **Developer-Friendly**:
+- **Developer Friendly**:
    - Compliant with the Google Java Style Guide.
-   - Fully documented with JavaDoc and OpenAPI specifications.
-   - Includes comprehensive unit tests for critical components.
+   - Documented with JavaDoc and OpenAPI specifications.
+   - Includes integration and unit tests for critical components.
 
 ---
 
 ## Tech Stack
 
-- **Java**
 - **Spring Boot**
 - **Database**: PostgreSQL
 - **Security**: Spring Security with JWT
@@ -46,15 +45,6 @@ The **Car Lease Platform API** is a microservice-based REST API designed to faci
 ---
 
 ## Getting Started
-
-### Prerequisites
-
-1. **Java**: Ensure Java 17 or later is installed.
-2. **Maven**: Required for building and running the project.
-3. **PostgreSQL**: Set up a PostgreSQL database with the following credentials:
-   - **URL**: `jdbc:postgresql://localhost:5432/car_lease_platform`
-   - **Username**: `carlease_user`
-   - **Password**: `carlease_pass`
 
 ### Setup
 
@@ -88,16 +78,9 @@ The **Car Lease Platform API** is a microservice-based REST API designed to faci
  - POST /api/cars: Add a new car. 
  - PUT /api/cars/{id}: Update an existing car. 
  - DELETE /api/cars/{id}: Delete a car.
+   
 3. **Lease Rate Calculation**
  - POST /api/lease/calculate: Calculate the lease rate based on parameters like mileage, duration, interest rate, and price.
  - POST /api/lease/calculate-with-car-id: Calculate the lease rate using a car ID to fetch vehicle details.
 
-### Future Enhancements
- - Containerization using Docker for easier deployment.
- - Persistent datastore integration (e.g., PostgreSQL in production environments).
- - Advanced metrics and logging with tools like Prometheus and Grafana.
- - Fixing bugs in SwaggerUI.
- - Adding new exception handling mechanism.
- - Secret management integration 
- - Adding javadoc for all services
 
